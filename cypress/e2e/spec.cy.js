@@ -20,34 +20,42 @@ describe('login', () => {
 })
 
 describe('inventory', () => {
-  it('click add to cart', () => {
+  beforeEach(() => {
     cy.login('standard_user', 'secret_sauce')
+  })
+
+  it('click add to cart', () => {
+    //cy.login('standard_user', 'secret_sauce')
     cy.get('[data-test="add-to-cart-sauce-labs-backpack"]').click()
     cy.contains('Remove')
   })
 
   it('click cart', () => {
-    cy.login('standard_user', 'secret_sauce')
+    //cy.login('standard_user', 'secret_sauce')
     cy.get('[data-test="shopping-cart-link"]').click()
     cy.url().should('match', /cart.html/)
   })
 })
 
 describe('cart', () => {
-  it('removeFromCart', () => {
+  beforeEach(() => {
     cy.addToCart()
+  })
+
+  it('removeFromCart', () => {
+    //cy.addToCart()
     cy.get('[data-test="remove-sauce-labs-backpack"]').click()
     cy.get('[data-test="inventory-item-name"]').should('not.exist')
   })
 
   it('continue shopping', () => {
-    cy.addToCart()
+    //cy.addToCart()
     cy.get('[data-test="continue-shopping"]').click()
     cy.url().should('match', /inventory.html/)
   })
 
   it('go to checkout', () => {
-    cy.addToCart()
+    //cy.addToCart()
     cy.get('[data-test="checkout"]').click()
     cy.url().should('match', /checkout-step-one.html/)
   })
@@ -73,14 +81,17 @@ describe('checkout', () => {
 })
 
 describe('checkout step two', () => {
-  it('checkout step two cancel', () => {
+  beforeEach(() => {
     cy.checkoutStepTwo()
+  })
+  it('checkout step two cancel', () => {
+    //cy.checkoutStepTwo()
     cy.get('[data-test="cancel"]').click()
     cy.url().should('match', /inventory.html/)
   })
 
   it('Checkout Finish', () => {
-    cy.checkoutStepTwo()
+    //cy.checkoutStepTwo()
     cy.get('[data-test="finish"]').click()
     cy.url().should('match', /checkout-complete.html/)
   })
